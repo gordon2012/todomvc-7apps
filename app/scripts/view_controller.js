@@ -21,8 +21,13 @@
 		},
 
 		refreshTodoList: function() {
+			var todos = todoManager.getSavedTodos(),
+					template = $('#todoTemplate').text();
 			todoList.empty();
-			todoManager.createTodosIn(todoList);
+
+			_.each(todos, function(todo){
+				todoList.append($(Mustache.render(template, todo)));
+			}, this);
 		}
 	};
 

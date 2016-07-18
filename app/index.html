@@ -9,12 +9,19 @@
 
 		<input id="addTodoText" type="text"> <a id="addTodoButton" class="btn btn-primary">Add</a>
 
-		<ul id="todoList"></ul>
+		<div id="todoList"></div>
 
 		<script src="node_modules/underscore/underscore.js"></script>
 		<script src="node_modules/jquery/dist/jquery.js"></script>
+		<script src="node_modules/mustache/mustache.js"></script>
 		<script src="scripts/main.js"></script>
 		<script src="scripts/todo_manager.js"></script>
 		<script src="scripts/view_controller.js"></script>
+
+		<script id="todoTemplate" type="text/template">
+			<div class="todo">
+				<input type="checkbox"/>{{text}}
+			</div>
+		</script>
 	</body>
 </html>

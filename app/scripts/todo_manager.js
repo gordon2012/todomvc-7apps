@@ -8,14 +8,9 @@
 			this.savedTodos.push({text: text});
 		},
 
-		createTodosIn: function(list) {
-
+		getSavedTodos: function() {
 			var todos = [].concat(this.savedTodos);
-
-			_.each(todos, function(todo){
-				var item = $("<li class='todo'>" + todo.text + "</li>");
-				$(list).append(item);
-			});
+			return todos;
 		}
 	};
 
