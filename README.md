@@ -7,3 +7,4 @@ DONE:
 - add view controller and hook up add todo button
 - add todo manager and complete functionality of add todo button
 - recreate todo as a Mustache template
+- add responsive interface

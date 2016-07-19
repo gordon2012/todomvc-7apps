@@ -7,9 +7,45 @@
 	</head>
 	<body>
 
-		<input id="addTodoText" type="text"> <a id="addTodoButton" class="btn btn-primary">Add</a>
+		<div class="jumbotron"> <!-- Header -->
+			<h1 class="text-center">
+				Todo MVC
+			</h1>
+		</div> <!-- /Header -->
 
-		<div id="todoList"></div>
+		<div class="container"> <!-- Main Container -->
+			<div class="well input-group"> <!-- Add Todo -->
+				<input id="addTodoText" type="text" class="form-control"/>
+				<a id="addTodoButton" class="input-group-addon btn btn-default">Add</a>
+			</div>  <!-- /Add Todo -->
+
+			<div id="todoList" class="well list-group"> <!-- Todo List -->
+			</div> <!-- /Todo List -->
+
+			<div class="well"> <!-- Filter and Sort -->
+				<div class="row"> <!-- inner row -->
+					<div class="col-sm-6 panel panel-default">
+						<div class="panel-body">
+						Filter:
+						<a class="btn btn-xs btn-primary">all</a>
+						<a class="btn btn-xs btn-default">todo</a>
+						<a class="btn btn-xs btn-default">done</a>
+						</div>
+					</div>
+
+					<div class="col-sm-6 panel panel-default">
+						<div class="panel-body">
+						Sort:
+						<a class="btn btn-xs btn-primary">none</a>
+						<a class="btn btn-xs btn-default">A-Z</a>
+						<a class="btn btn-xs btn-default">Z-A</a>
+						<a class="btn btn-xs btn-default">todo &gt;</a>
+						<a class="btn btn-xs btn-default">done &gt;</a>
+						</div>
+					</div>
+				</div> <!-- /inner row -->
+			</div> <!-- /Filter and Sort -->
+		</div>  <!-- /Main Container -->
 
 		<script src="node_modules/underscore/underscore.js"></script>
 		<script src="node_modules/jquery/dist/jquery.js"></script>
@@ -18,10 +54,21 @@
 		<script src="scripts/todo_manager.js"></script>
 		<script src="scripts/view_controller.js"></script>
 
-		<script id="todoTemplate" type="text/template">
-			<div class="todo">
-				<input type="checkbox"/>{{text}}
+		<script id="todoTemplate" type="text/template"> <!-- Todo Template -->
+			<div class="row list-group-item"> 
+				<div class="col-sm-8">
+					<input type="checkbox" />
+					{{text}}
+				</div>
+				<div class="col-sm-4">
+					<div class="pull-right">
+					<a class="btn btn-xs btn-default">Edit</a>
+					<a class="btn btn-xs btn-default">Remove</a>
+					<a class="btn btn-xs btn-default">Move</a>
+					</div>
+				</div>
 			</div>
-		</script>
+		</script> <!-- /Todo Template -->
+
 	</body>
 </html>
