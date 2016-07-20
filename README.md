@@ -10,3 +10,4 @@ DONE:
 - add responsive interface
 - implement delete todo using index
 - style UI toggle of filter and sort buttons
+- textbox adds todo and clears on enter

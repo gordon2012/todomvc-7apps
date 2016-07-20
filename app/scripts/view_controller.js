@@ -12,6 +12,8 @@
 	var MainViewController = {
 		initialize: function() {
 			this.configureListeners();
+
+			addTodoText.focus();
 		},
 
 		configureListeners: function() {
@@ -23,12 +25,21 @@
 			addTodoButton.click(this.addTodoFunction);
 			filterButtons.click(this.filterButtonFunction);
 			sortButtons.click(this.sortButtonFunction);
+
+			addTodoText.keydown(function(evt) {
+				if(evt.which == 13)
+				{
+					addTodoButton.click();
+					return false;
+				}
+			});
 			
 		},
 
 		addTodoClicked: function(event) {
 			todoManager.saveTodo(addTodoText.val());
 			this.refreshTodoList();
+			addTodoText.val('');
 		},
 
 		filterButtonClicked: function(event) {
