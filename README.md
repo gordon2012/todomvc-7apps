@@ -8,3 +8,4 @@ DONE:
 - add todo manager and complete functionality of add todo button
 - recreate todo as a Mustache template
 - add responsive interface
+- implement delete todo using index

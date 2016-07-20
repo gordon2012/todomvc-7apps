@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles/styles.css">
 		<meta charset="utf-8">
 		<title></title>
 	</head>
@@ -55,15 +56,15 @@
 		<script src="scripts/view_controller.js"></script>
 
 		<script id="todoTemplate" type="text/template"> <!-- Todo Template -->
-			<div class="row list-group-item"> 
+			<div class="todo row list-group-item"> 
 				<div class="col-sm-8">
 					<input type="checkbox" />
-					{{text}}
+					<span class="{{done}}">{{text}}</span>
 				</div>
 				<div class="col-sm-4">
 					<div class="pull-right">
 					<a class="btn btn-xs btn-default">Edit</a>
-					<a class="btn btn-xs btn-default">Remove</a>
+					<a class="delete-todo btn btn-xs btn-default">Remove</a>
 					<a class="btn btn-xs btn-default">Move</a>
 					</div>
 				</div>
