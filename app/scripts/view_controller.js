@@ -4,7 +4,10 @@
 		todoManager = namespaces.managers.TodoManager,
 		todoList = $('#todoList'),
 		addTodoButton = $('a#addTodoButton'),
-		addTodoText = $('#addTodoText');
+		addTodoText = $('#addTodoText'),
+		filterButtons = $('.filter');
+		sortButtons = $('.sort');
+
 
 	var MainViewController = {
 		initialize: function() {
@@ -14,13 +17,28 @@
 		configureListeners: function() {
 			this.addTodoFunction = _.bind(this.addTodoClicked, this);
 			this.deleteTodoFunction = _.bind(this.deleteTodoClicked, this);
+			this.filterButtonFunction = _.bind(this.filterButtonClicked, this);
+			this.sortButtonFunction = _.bind(this.sortButtonClicked, this);
 
 			addTodoButton.click(this.addTodoFunction);
+			filterButtons.click(this.filterButtonFunction);
+			sortButtons.click(this.sortButtonFunction);
+			
 		},
 
 		addTodoClicked: function(event) {
 			todoManager.saveTodo(addTodoText.val());
 			this.refreshTodoList();
+		},
+
+		filterButtonClicked: function(event) {
+			filterButtons.removeClass('btn-primary').addClass('btn-default');
+			$(event.target).removeClass('btn-default').addClass('btn-primary');
+		},
+
+		sortButtonClicked: function(event) {
+			sortButtons.removeClass('btn-primary').addClass('btn-default');
+			$(event.target).removeClass('btn-default').addClass('btn-primary');
 		},
 
 		refreshTodoList: function() {

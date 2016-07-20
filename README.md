@@ -9,3 +9,4 @@ DONE:
 - recreate todo as a Mustache template
 - add responsive interface
 - implement delete todo using index
+- style UI toggle of filter and sort buttons
