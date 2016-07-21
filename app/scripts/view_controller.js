@@ -19,6 +19,7 @@
 		configureListeners: function() {
 			this.addTodoFunction = _.bind(this.addTodoClicked, this);
 			this.deleteTodoFunction = _.bind(this.deleteTodoClicked, this);
+			this.toggleTodoFunction = _.bind(this.toggleTodoClicked, this);
 			this.filterButtonFunction = _.bind(this.filterButtonClicked, this);
 			this.sortButtonFunction = _.bind(this.sortButtonClicked, this);
 
@@ -42,6 +43,23 @@
 			addTodoText.val('');
 		},
 
+		toggleTodoClicked: function(event) {
+			//event.preventDefault();
+			//var target = $(event.currentTarget);
+
+			//console.log(target.prop('checked'));
+			// TODO: Might need to implement parent storage of index
+
+			//$(':checkbox').change(function() {
+			//	console.log('checked');
+			//});
+
+			//target.prop('checked', !target.prop('checked'));
+
+			console.log(event.delegateTarget);
+			event.delegateTarget.prop
+		},
+
 		filterButtonClicked: function(event) {
 			filterButtons.removeClass('btn-primary').addClass('btn-default');
 			$(event.target).removeClass('btn-default').addClass('btn-primary');
@@ -63,11 +81,14 @@
 		},
 
 		createTodo: function(todo, index, template) {
-			var item = $(Mustache.render(template, todo)),
-				deleteButton = item.find('.delete-todo');
-
+			var item = $(Mustache.render(template, todo));
+			
+			var deleteButton = item.find('.delete-todo');
 			deleteButton.data('todoIndex', index);
 			deleteButton.click(this.deleteTodoFunction);
+
+			var checkBox = item.find('input[type="checkbox"]');
+			checkBox.click(this.toggleTodoFunction);
 
 			todoList.append(item);
 		},
