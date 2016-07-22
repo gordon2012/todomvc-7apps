@@ -13,6 +13,10 @@
 
 		deleteTodo: function(index) {
 			this.savedTodos.splice(index, 1);
+		},
+
+		toggleTodo: function(index) {
+			this.savedTodos[index].done = this.savedTodos[index].done === '' ? 'todo-done' : ''; 
 		}
 	};
 

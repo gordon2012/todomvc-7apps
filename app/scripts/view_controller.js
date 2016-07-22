@@ -1,5 +1,4 @@
 (function($){
-
 	var namespaces = $.app.namespaces,
 		todoManager = namespaces.managers.TodoManager,
 		todoList = $('#todoList'),
@@ -8,8 +7,11 @@
 		filterButtons = $('.filter');
 		sortButtons = $('.sort');
 
-
 	var MainViewController = {
+
+		// ========
+		// Initialization
+		//
 		initialize: function() {
 			this.configureListeners();
 
@@ -19,6 +21,7 @@
 		configureListeners: function() {
 			this.addTodoFunction = _.bind(this.addTodoClicked, this);
 			this.deleteTodoFunction = _.bind(this.deleteTodoClicked, this);
+			this.checkboxFunction = _.bind(this.checkboxClicked, this);
 			this.toggleTodoFunction = _.bind(this.toggleTodoClicked, this);
 			this.filterButtonFunction = _.bind(this.filterButtonClicked, this);
 			this.sortButtonFunction = _.bind(this.sortButtonClicked, this);
@@ -34,30 +37,39 @@
 					return false;
 				}
 			});
-			
 		},
+		// ========
 
+
+		// ========
+		// Event Handlers
+		//
 		addTodoClicked: function(event) {
 			todoManager.saveTodo(addTodoText.val());
 			this.refreshTodoList();
 			addTodoText.val('');
 		},
 
+		deleteTodoClicked: function(event) {
+			var target = $(event.currentTarget);
+			var parent = target.parents('.todo');
+			var index = parent.data('todoIndex');
+			
+			todoManager.deleteTodo(index);
+			this.refreshTodoList();
+		},
+
+		checkboxClicked: function(event) {
+			event.preventDefault();
+		},
+
 		toggleTodoClicked: function(event) {
-			//event.preventDefault();
-			//var target = $(event.currentTarget);
+			var target = $(event.currentTarget);
+			var parent = target.parents('.todo');
+			var index = parent.data('todoIndex');
 
-			//console.log(target.prop('checked'));
-			// TODO: Might need to implement parent storage of index
-
-			//$(':checkbox').change(function() {
-			//	console.log('checked');
-			//});
-
-			//target.prop('checked', !target.prop('checked'));
-
-			console.log(event.delegateTarget);
-			event.delegateTarget.prop
+			todoManager.toggleTodo(index);
+			this.refreshTodoList();
 		},
 
 		filterButtonClicked: function(event) {
@@ -69,6 +81,8 @@
 			sortButtons.removeClass('btn-primary').addClass('btn-default');
 			$(event.target).removeClass('btn-default').addClass('btn-primary');
 		},
+		// ========
+
 
 		refreshTodoList: function() {
 			var todos = todoManager.getSavedTodos(),
@@ -81,25 +95,21 @@
 		},
 
 		createTodo: function(todo, index, template) {
-			var item = $(Mustache.render(template, todo));
-			
+			var item = $(Mustache.render(template, todo));			
+			item.data('todoIndex', index);
+
 			var deleteButton = item.find('.delete-todo');
-			deleteButton.data('todoIndex', index);
 			deleteButton.click(this.deleteTodoFunction);
 
 			var checkBox = item.find('input[type="checkbox"]');
-			checkBox.click(this.toggleTodoFunction);
+			checkBox.click(this.checkboxFunction);			
+			checkBox.prop('checked', todo.done === '' ? '' : 'checked');
+
+			var todoClickarea = item.find('.todo-clickarea');
+			todoClickarea.click(this.toggleTodoFunction);
 
 			todoList.append(item);
 		},
-
-		deleteTodoClicked: function(event) {
-			var target = $(event.currentTarget),
-				index = target.data('todoIndex'),
-				parent = target.parents('.todo');
-			todoManager.deleteTodo(index);
-			this.refreshTodoList();
-		}
 	};
 
 	$.app.register('controllers.MainViewController', MainViewController);

@@ -1,3 +1,15 @@
+/*********
+ * DEBUG *
+ *********/
+.bg-red {
+    background: red;
+}
+
+
 .todo-done {
     text-decoration: line-through;
+}
+
+.todo-clickarea {
+    border: 1px solid #e3e3e3;
 }
