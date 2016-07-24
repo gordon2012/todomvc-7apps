@@ -13,3 +13,4 @@ DONE:
 - textbox adds todo and clears on enter
 - WIP: Add strikethrough on checkbox
 - Add strikethrough on checkbox
+- WIP: Filter

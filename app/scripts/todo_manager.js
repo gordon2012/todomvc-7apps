@@ -1,6 +1,7 @@
 (function($){
 	var TodoManager = {
 		savedTodos: [],
+		filter = '',
 
 		saveTodo: function(text) {
 			this.savedTodos.push({text: text, done: ""});
