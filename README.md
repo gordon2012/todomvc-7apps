@@ -14,3 +14,4 @@ DONE:
 - WIP: Add strikethrough on checkbox
 - Add strikethrough on checkbox
 - WIP: Filter
+- Implement filter buttons

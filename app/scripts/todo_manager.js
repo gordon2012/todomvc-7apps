@@ -1,14 +1,25 @@
 (function($){
 	var TodoManager = {
 		savedTodos: [],
-		filter = '',
+		filter: '',
 
 		saveTodo: function(text) {
-			this.savedTodos.push({text: text, done: ""});
+			this.savedTodos.push({text: text, done: ''});
 		},
 
 		getSavedTodos: function() {
-			var todos = [].concat(this.savedTodos);
+			var todos;
+			switch(this.filter) {
+				case 'todo':
+					todos = this.savedTodos.filter(function(e) {return e.done === '';});
+					break;
+				case 'done':
+					todos = this.savedTodos.filter(function(e) {return e.done === 'todo-done';});
+					break;
+
+				default:
+					todos = [].concat(this.savedTodos);
+			}
 			return todos;
 		},
 
@@ -18,6 +29,10 @@
 
 		toggleTodo: function(index) {
 			this.savedTodos[index].done = this.savedTodos[index].done === '' ? 'todo-done' : ''; 
+		},
+
+		setFilter: function(filter) {
+			this.filter = filter;
 		}
 	};
 

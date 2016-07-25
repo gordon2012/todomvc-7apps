@@ -74,7 +74,12 @@
 
 		filterButtonClicked: function(event) {
 			filterButtons.removeClass('btn-primary').addClass('btn-default');
-			$(event.target).removeClass('btn-default').addClass('btn-primary');
+			var target = $(event.target);
+			target.removeClass('btn-default').addClass('btn-primary');
+
+			var filter = target.hasClass('filter-todo') ? 'todo' : (target.hasClass('filter-done') ? 'done' : '' ); 
+			todoManager.setFilter(filter);
+			this.refreshTodoList();
 		},
 
 		sortButtonClicked: function(event) {
