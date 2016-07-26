@@ -15,3 +15,4 @@ DONE:
 - Add strikethrough on checkbox
 - WIP: Filter
 - Implement filter buttons
+- WIP: Sort

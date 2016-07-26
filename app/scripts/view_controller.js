@@ -84,7 +84,23 @@
 
 		sortButtonClicked: function(event) {
 			sortButtons.removeClass('btn-primary').addClass('btn-default');
-			$(event.target).removeClass('btn-default').addClass('btn-primary');
+			var target = $(event.target);
+			target.removeClass('btn-default').addClass('btn-primary');
+
+			var sort = '';
+			_.each(['alpha', 'r-alpha', 'todo', 'done'], function(e, i){
+				sort = target.hasClass('sort-' + e) ? e : sort;
+			}, this);
+
+			//console.log(sort);
+			// TODO: fix index error on delete
+
+			todoManager.setSort(sort);
+			this.refreshTodoList();
+
+
+
+
 		},
 		// ========
 

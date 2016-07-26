@@ -2,6 +2,7 @@
 	var TodoManager = {
 		savedTodos: [],
 		filter: '',
+		sort: '',
 
 		saveTodo: function(text) {
 			this.savedTodos.push({text: text, done: ''});
@@ -20,6 +21,19 @@
 				default:
 					todos = [].concat(this.savedTodos);
 			}
+
+			todos.forEach(function(e){console.log(e.text)});
+			console.log('====');
+			if(this.sort === 'alpha') {
+				//console.log(this.sort);
+				todos = todos.sort(function(a,b){
+					if(a.text > b.text) return 1;
+					if(a.text < b.text) return -1;
+					return 0;
+				});
+			}
+			//console.log(todos.text);
+			todos.forEach(function(e){console.log(e.text)});
 			return todos;
 		},
 
@@ -33,6 +47,10 @@
 
 		setFilter: function(filter) {
 			this.filter = filter;
+		},
+
+		setSort: function(sort) {
+			this.sort = sort;
 		}
 	};
 
