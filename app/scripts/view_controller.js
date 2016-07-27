@@ -5,10 +5,11 @@
 		addTodoButton = $('a#addTodoButton'),
 		addTodoText = $('#addTodoText'),
 		filterButtons = $('.filter');
-		sortButtons = $('.sort');
+		sortButtons = $('.sort').
+		deleteDoneButton = $('.delete-done');
+
 
 	var MainViewController = {
-
 		// ========
 		// Initialization
 		//
@@ -25,10 +26,12 @@
 			this.toggleTodoFunction = _.bind(this.toggleTodoClicked, this);
 			this.filterButtonFunction = _.bind(this.filterButtonClicked, this);
 			this.sortButtonFunction = _.bind(this.sortButtonClicked, this);
+			this.deleteDoneFunction = _.bind(this.deleteDoneClicked, this);
 
 			addTodoButton.click(this.addTodoFunction);
 			filterButtons.click(this.filterButtonFunction);
 			sortButtons.click(this.sortButtonFunction);
+			deleteDoneButton.click(this.deleteDoneFunction);
 
 			addTodoText.keydown(function(evt) {
 				if(evt.which == 13)
@@ -93,6 +96,11 @@
 			}, this);
 
 			todoManager.setSort(sort);
+			this.refreshTodoList();
+		},
+
+		deleteDoneClicked: function(event) {
+			todoManager.deleteDone();
 			this.refreshTodoList();
 		},
 		// ========

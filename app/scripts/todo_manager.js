@@ -16,6 +16,10 @@
 			this.savedTodos.splice(index, 1);
 		},
 
+		deleteDone: function() {
+			this.savedTodos = this.savedTodos.filter(function(e){return e.done === '' ? true : false});
+		},
+
 		toggleTodo: function(index) {
 			this.savedTodos[index].done = this.savedTodos[index].done === '' ? 'todo-done' : ''; 
 		},
