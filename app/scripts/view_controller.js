@@ -92,26 +92,77 @@
 				sort = target.hasClass('sort-' + e) ? e : sort;
 			}, this);
 
-			//console.log(sort);
-			// TODO: fix index error on delete
-
 			todoManager.setSort(sort);
 			this.refreshTodoList();
-
-
-
-
 		},
 		// ========
 
 
 		refreshTodoList: function() {
-			var todos = todoManager.getSavedTodos(),
-				template = $('#todoTemplate').text();
+			var todos = todoManager.getSavedTodos();
+			var template = $('#todoTemplate').text();
 			todoList.empty();
 
-			_.each(todos, function(todo, index){
-				this.createTodo(todo, index, template);
+			todos = todos.map(function(e,i) {
+				var obj = e;
+				obj.index = i;
+				return obj;
+			});
+
+			// Filter ==
+			//
+			switch(todoManager.filter) {
+				case 'todo':
+					todos = todos.filter(function(e) {return e.done === '';});
+					break;
+				case 'done':
+					todos = todos.filter(function(e) {return e.done === 'todo-done';});
+					break;
+			}
+			// ==
+
+			// Sort ==
+			//
+			var sortFunction;
+			switch(todoManager.sort) {
+				case 'alpha':
+					sortFunction = function(a,b) {
+						if(a.text > b.text) return 1;
+						if(a.text < b.text) return -1;
+						return 0;
+					};
+					break;
+				case 'r-alpha':
+					sortFunction = function(a,b) {
+						if(a.text > b.text) return -1;
+						if(a.text < b.text) return 1;
+						return 0;
+					};
+					break;
+				case 'todo':
+					sortFunction = function(a,b) {
+						if(a.done === 'todo-done' && b.done === '') return 1;
+						if(b.done === 'todo-done' && a.done === '') return -1;
+						return 0;
+					};
+					break;
+				case 'done':
+					sortFunction = function(a,b) {
+						if(a.done === 'todo-done' && b.done === '') return -1;
+						if(b.done === 'todo-done' && a.done === '') return 1;
+						return 0;
+					};
+					break;
+				default:
+					sortFunction = function() {
+						return 0;
+					};
+			};
+			todos = todos.sort(sortFunction);
+			// ==
+
+			_.each(todos, function(todo){
+				this.createTodo(todo, todo.index, template);
 			}, this);
 		},
 

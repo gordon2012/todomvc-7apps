@@ -9,32 +9,7 @@
 		},
 
 		getSavedTodos: function() {
-			var todos;
-			switch(this.filter) {
-				case 'todo':
-					todos = this.savedTodos.filter(function(e) {return e.done === '';});
-					break;
-				case 'done':
-					todos = this.savedTodos.filter(function(e) {return e.done === 'todo-done';});
-					break;
-
-				default:
-					todos = [].concat(this.savedTodos);
-			}
-
-			todos.forEach(function(e){console.log(e.text)});
-			console.log('====');
-			if(this.sort === 'alpha') {
-				//console.log(this.sort);
-				todos = todos.sort(function(a,b){
-					if(a.text > b.text) return 1;
-					if(a.text < b.text) return -1;
-					return 0;
-				});
-			}
-			//console.log(todos.text);
-			todos.forEach(function(e){console.log(e.text)});
-			return todos;
+			return [].concat(this.savedTodos);
 		},
 
 		deleteTodo: function(index) {

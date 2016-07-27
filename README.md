@@ -16,3 +16,4 @@ DONE:
 - WIP: Filter
 - Implement filter buttons
 - WIP: Sort
+- Implement sort buttons
