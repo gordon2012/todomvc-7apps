@@ -64,13 +64,23 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="pull-right">
-					<a class="btn btn-xs btn-default">Edit</a>
+					<a class="edit-todo btn btn-xs btn-default">Edit</a>
 					<a class="delete-todo btn btn-xs btn-default">Remove</a>
 					<a class="btn btn-xs btn-default">Move</a>
 					</div>
 				</div>
 			</div>
 		</script> <!-- /Todo Template -->
+
+		
+		<script id="editTodoTemplate" type="text/template"> <!-- Edit Todo Template -->  
+			<div class="todo editting row list-group-item">
+				<div class="input-group">
+					<input id="editTodoText" type="text" placeholder="{{text}}" class="form-control"/>
+					<a id="saveTodoButton" class="input-group-addon btn btn-default">Save</a>
+				</div>
+			</div>
+		</script> <!-- /Edit Todo Template -->
 
 	</body>
 </html>

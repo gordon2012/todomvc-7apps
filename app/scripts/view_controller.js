@@ -4,8 +4,8 @@
 		todoList = $('#todoList'),
 		addTodoButton = $('a#addTodoButton'),
 		addTodoText = $('#addTodoText'),
-		filterButtons = $('.filter');
-		sortButtons = $('.sort').
+		filterButtons = $('.filter'),
+		sortButtons = $('.sort'),
 		deleteDoneButton = $('.delete-done');
 
 
@@ -28,10 +28,16 @@
 			this.sortButtonFunction = _.bind(this.sortButtonClicked, this);
 			this.deleteDoneFunction = _.bind(this.deleteDoneClicked, this);
 
+			//
+			this.editTodoFunction = _.bind(this.editTodoClicked, this);
+
 			addTodoButton.click(this.addTodoFunction);
 			filterButtons.click(this.filterButtonFunction);
 			sortButtons.click(this.sortButtonFunction);
 			deleteDoneButton.click(this.deleteDoneFunction);
+
+			//
+			//$('.edit-todo').click(this.editTodoFunction);
 
 			addTodoText.keydown(function(evt) {
 				if(evt.which == 13)
@@ -102,6 +108,16 @@
 		deleteDoneClicked: function(event) {
 			todoManager.deleteDone();
 			this.refreshTodoList();
+		},
+
+		editTodoClicked: function(event) {
+			var target = $(event.currentTarget);
+			var parent = target.parents('.todo');
+			var index = parent.data('todoIndex');
+
+			console.log('edit');
+			// *
+			todoManager.editting = index;
 		},
 		// ========
 
@@ -180,6 +196,11 @@
 
 			var deleteButton = item.find('.delete-todo');
 			deleteButton.click(this.deleteTodoFunction);
+
+			//
+			var editButton = item.find('.edit-todo');
+			editButton.click(this.editTodoFunction);
+
 
 			var checkBox = item.find('input[type="checkbox"]');
 			checkBox.click(this.checkboxFunction);			

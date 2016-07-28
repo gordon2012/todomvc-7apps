@@ -18,3 +18,4 @@ DONE:
 - WIP: Sort
 - Implement sort buttons
 - Add delete done button
+- WIP: Add edit todos

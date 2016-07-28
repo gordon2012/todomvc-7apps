@@ -3,6 +3,7 @@
 		savedTodos: [],
 		filter: '',
 		sort: '',
+		editting: -1,
 
 		saveTodo: function(text) {
 			this.savedTodos.push({text: text, done: ''});
