@@ -31,6 +31,10 @@
 
 		setSort: function(sort) {
 			this.sort = sort;
+		},
+
+		editTodo: function(index, text) {
+			this.savedTodos[index].text = text;
 		}
 	};
 

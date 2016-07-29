@@ -30,6 +30,7 @@
 
 			//
 			this.editTodoFunction = _.bind(this.editTodoClicked, this);
+			this.saveTodoFunction = _.bind(this.saveTodoClicked, this);
 
 			addTodoButton.click(this.addTodoFunction);
 			filterButtons.click(this.filterButtonFunction);
@@ -115,9 +116,20 @@
 			var parent = target.parents('.todo');
 			var index = parent.data('todoIndex');
 
-			console.log('edit');
+			//console.log('edit');
 			// *
 			todoManager.editting = index;
+			this.refreshTodoList();
+		},
+
+		saveTodoClicked: function(event) {
+			var target = $(event.currentTarget);
+			var parent = target.parents('.todo');
+			var index = parent.data('todoIndex');
+			
+			todoManager.editTodo(index, $('#editTodoText').val());
+			todoManager.editting = -1;
+			this.refreshTodoList();
 		},
 		// ========
 
@@ -126,6 +138,9 @@
 			var todos = todoManager.getSavedTodos();
 			var template = $('#todoTemplate').text();
 			todoList.empty();
+
+			//
+			var editTemplate = $('#editTodoTemplate').text();
 
 			todos = todos.map(function(e,i) {
 				var obj = e;
@@ -184,10 +199,16 @@
 			};
 			todos = todos.sort(sortFunction);
 			// ==
-
-			_.each(todos, function(todo){
-				this.createTodo(todo, todo.index, template);
+			console.log('{', todoManager.editting);
+			_.each(todos, function(todo) {
+				console.log(todo.index);
+				if(todoManager.editting === todo.index) {
+					this.createEditTodo(todo, todo.index, editTemplate);
+				} else {
+					this.createTodo(todo, todo.index, template);
+				}
 			}, this);
+			console.log('}');
 		},
 
 		createTodo: function(todo, index, template) {
@@ -211,6 +232,18 @@
 
 			todoList.append(item);
 		},
+
+		createEditTodo: function(todo, index, template) {
+			var item = $(Mustache.render(template, todo));			
+			item.data('todoIndex', index);
+
+			var saveButton = item.find('#saveTodoButton');
+
+			// click
+			saveButton.click(this.saveTodoFunction);
+
+			todoList.append(item);
+		}
 	};
 
 	$.app.register('controllers.MainViewController', MainViewController);
