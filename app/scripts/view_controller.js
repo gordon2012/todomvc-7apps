@@ -37,9 +37,6 @@
 			sortButtons.click(this.sortButtonFunction);
 			deleteDoneButton.click(this.deleteDoneFunction);
 
-			//
-			//$('.edit-todo').click(this.editTodoFunction);
-
 			addTodoText.keydown(function(evt) {
 				if(evt.which == 13)
 				{
@@ -116,8 +113,6 @@
 			var parent = target.parents('.todo');
 			var index = parent.data('todoIndex');
 
-			//console.log('edit');
-			// *
 			todoManager.editting = index;
 			this.refreshTodoList();
 		},
@@ -199,7 +194,6 @@
 			};
 			todos = todos.sort(sortFunction);
 			// ==
-			console.log('{', todoManager.editting);
 			_.each(todos, function(todo) {
 				console.log(todo.index);
 				if(todoManager.editting === todo.index) {
@@ -208,7 +202,6 @@
 					this.createTodo(todo, todo.index, template);
 				}
 			}, this);
-			console.log('}');
 		},
 
 		createTodo: function(todo, index, template) {
@@ -218,10 +211,8 @@
 			var deleteButton = item.find('.delete-todo');
 			deleteButton.click(this.deleteTodoFunction);
 
-			//
 			var editButton = item.find('.edit-todo');
 			editButton.click(this.editTodoFunction);
-
 
 			var checkBox = item.find('input[type="checkbox"]');
 			checkBox.click(this.checkboxFunction);			
@@ -238,11 +229,24 @@
 			item.data('todoIndex', index);
 
 			var saveButton = item.find('#saveTodoButton');
-
-			// click
 			saveButton.click(this.saveTodoFunction);
 
 			todoList.append(item);
+
+			var editTodoText = $('#editTodoText'); 
+
+			editTodoText.focus();
+			var tempText = editTodoText.val()
+			editTodoText.val('');
+			editTodoText.val(tempText);
+
+			editTodoText.keydown(function(evt) {
+				if(evt.which == 13)
+				{
+					saveButton.click();
+					return false;
+				}
+			});
 		}
 	};
 
