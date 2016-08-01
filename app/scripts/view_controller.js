@@ -8,6 +8,7 @@
 		sortButtons = $('.sort'),
 		deleteDoneButton = $('.delete-done');
 
+	var drag = -1;
 
 	var MainViewController = {
 		// ========
@@ -195,7 +196,6 @@
 			todos = todos.sort(sortFunction);
 			// ==
 			_.each(todos, function(todo) {
-				console.log(todo.index);
 				if(todoManager.editting === todo.index) {
 					this.createEditTodo(todo, todo.index, editTemplate);
 				} else {
@@ -220,6 +220,26 @@
 
 			var todoClickarea = item.find('.todo-clickarea');
 			todoClickarea.click(this.toggleTodoFunction);
+
+			//
+			var moveButton = item.find('.move-todo');
+
+			moveButton.mousedown(_.bind(function(event){
+				console.log('mousedown');
+				
+			// var target = $(event.currentTarget);
+			// var parent = target.parents('.todo');
+			// var index = parent.data('todoIndex');
+			
+				
+				this.drag = index; 
+			}, this));
+
+			item.mouseover(_.bind(function(event){
+				console.log(index, 'mouseover');
+			}, this));
+
+			
 
 			todoList.append(item);
 		},
