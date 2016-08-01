@@ -35,6 +35,12 @@
 
 		editTodo: function(index, text) {
 			this.savedTodos[index].text = text;
+		},
+
+		swapTodos: function(i, j) {
+			var temp = this.savedTodos[i];
+			this.savedTodos[i] = this.savedTodos[j];
+			this.savedTodos[j] = temp;
 		}
 	};
 

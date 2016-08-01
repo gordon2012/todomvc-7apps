@@ -224,19 +224,31 @@
 			//
 			var moveButton = item.find('.move-todo');
 
+			if(todoManager.sort !== '' || todoManager.filter !== '') moveButton.hide();
+
 			moveButton.mousedown(_.bind(function(event){
-				console.log('mousedown');
-				
-			// var target = $(event.currentTarget);
-			// var parent = target.parents('.todo');
-			// var index = parent.data('todoIndex');
-			
-				
-				this.drag = index; 
+				event.preventDefault();
+				//console.log('mousedown');
+				//if(todoManager.sort === '')
+				drag = index; 
 			}, this));
 
+			$(document).mouseup(_.bind(function(event){
+				drag = -1;
+			}, this));
+
+
+
 			item.mouseover(_.bind(function(event){
-				console.log(index, 'mouseover');
+				//console.log('index:', index, 'drag:', drag);
+
+				if(drag > -1 && drag != index) {
+					//console.log('SWAP:', index, drag);
+					todoManager.swapTodos(index, drag);
+					drag = index;
+					this.refreshTodoList();
+				}
+
 			}, this));
 
 			

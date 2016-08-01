@@ -22,3 +22,4 @@ DONE:
 - WIP: Add edit todos 2
 - Add edit todos
 - WIP: Add move todo
+- WIP: Add move todo: complete functionality
