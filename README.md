@@ -23,3 +23,4 @@ DONE:
 - Add edit todos
 - WIP: Add move todo
 - WIP: Add move todo: complete functionality
+- WIP: Add move todo: WIP: add flash to swap

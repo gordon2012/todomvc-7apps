@@ -13,3 +13,12 @@
 .todo-clickarea {
     border: 1px solid #e3e3e3;
 }
+
+.flash {
+    animation-name: flash-anim;
+    animation-duration: 0.3s;
+}
+@keyframes flash-anim {
+    from { background: yellow; }
+    to   { background: default;  }
+}

@@ -245,8 +245,23 @@
 				if(drag > -1 && drag != index) {
 					//console.log('SWAP:', index, drag);
 					todoManager.swapTodos(index, drag);
-					drag = index;
 					this.refreshTodoList();
+
+					// TODO: flash on swap (not working)
+					/*
+					$('.todo').each(function(i,e){
+						var todoIndex = e.data('todoIndex'); 
+						if( todoIndex === index || todoIndex === drag) {
+							e.addClass('flash');
+							setTimeout(function(){
+								e.removeClass('flash');
+							}, 500);
+						}
+					});
+					*/
+
+
+					drag = index;
 				}
 
 			}, this));
