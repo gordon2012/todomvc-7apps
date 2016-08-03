@@ -28,8 +28,6 @@
 			this.filterButtonFunction = _.bind(this.filterButtonClicked, this);
 			this.sortButtonFunction = _.bind(this.sortButtonClicked, this);
 			this.deleteDoneFunction = _.bind(this.deleteDoneClicked, this);
-
-			//
 			this.editTodoFunction = _.bind(this.editTodoClicked, this);
 			this.saveTodoFunction = _.bind(this.saveTodoClicked, this);
 
@@ -221,6 +219,10 @@
 			var todoClickarea = item.find('.todo-clickarea');
 			todoClickarea.click(this.toggleTodoFunction);
 
+			// == Move Todo ==
+			//
+			// TODO: Refactor: decouple from this function and add to basic event
+			//				   listeners
 			//
 			var moveButton = item.find('.move-todo');
 
@@ -228,8 +230,6 @@
 
 			moveButton.mousedown(_.bind(function(event){
 				event.preventDefault();
-				//console.log('mousedown');
-				//if(todoManager.sort === '')
 				drag = index; 
 			}, this));
 
@@ -237,19 +237,12 @@
 				drag = -1;
 			}, this));
 
-
-
 			item.mouseover(_.bind(function(event){
-				//console.log('index:', index, 'drag:', drag);
-
 				if(drag > -1 && drag != index) {
-					//console.log('SWAP:', index, drag);
 					todoManager.swapTodos(index, drag);
 					this.refreshTodoList();
-
-					// TODO: flash on swap (not working)
-					/*
-					$('.todo').each(function(i,e){
+					$('.todo').each(function(i,elem){
+						var e = $(elem);
 						var todoIndex = e.data('todoIndex'); 
 						if( todoIndex === index || todoIndex === drag) {
 							e.addClass('flash');
@@ -258,14 +251,11 @@
 							}, 500);
 						}
 					});
-					*/
-
-
 					drag = index;
 				}
 
 			}, this));
-
+			// == / ==
 			
 
 			todoList.append(item);
